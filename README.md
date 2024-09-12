@@ -1,13 +1,11 @@
 # Configuration API
 
----
-
 This project makes it easy to use configuration files in your project.
 
 ### Implementation
 1. Download JAR from releases or build yourself
 2. Put it in "libs" folder in your project (or any other folder)
-##### Gradle
+#### Gradle
 ```groovy
 repositories {
     flatDir {
@@ -27,9 +25,9 @@ dependencies {
 
 3. Done
 
-### Examples or How-to-Use
+### Examples
 
-##### Example 1
+#### Example 1
 ```java
 public class CreationConfig extends ConfigHandler {
     public CreationConfig() {
@@ -47,10 +45,11 @@ public class Main {
     public static void main(String[] args) {
         CreationConfig config = new CreationConfig();
         Boolean opt = config.getBoolean("opt2");
+        Main.set("opt1", "other_string");
     }
 }
 ```
-##### Result:
+#### Result:
 Directories with jar:
 ```
 - Main.jar
@@ -59,13 +58,13 @@ Directories with jar:
 config.properties:
 ```properties
 #Thu Sep 12 08:59:25 YEKT 2024
-opt1=String
+opt1=other_string
 opt2=true
 opt3=20
 opt4=2687.4
 ```
 
-##### Example 2
+#### Example 2
 ```java
 public class Main {
     ConfigHandler configHandler = new ConfigHandler(true, null, "config", "PROPERTIES");
@@ -93,7 +92,7 @@ public class Class {
     }
 }
 ```
-##### Result:
+#### Result:
 Directories with jar:
 ```
 - Main.jar
@@ -107,3 +106,11 @@ opt2=true
 opt3=20
 opt4=2687.4
 ```
+
+For more information check wiki.
+
+### Build
+uses **gradle 8.8** and **java 21**
+1. Download or clone this project
+2. Change the code
+3. Build

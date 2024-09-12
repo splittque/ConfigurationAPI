@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+repositories {
+    mavenCentral()
+}
+
+group = "me.splitque"
+version = "v1.0-alpha"
+
+dependencies {
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+    implementation 'org.json:json:20231013'
+    implementation 'org.yaml:snakeyaml:2.3'
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -3,6 +3,9 @@
 This project makes it easy to use configuration files in your project.
 
 ### Implementation
+
+---
+
 1. Download JAR from releases or build yourself
 2. Put it in "libs" folder in your project (or any other folder)
 #### Gradle
@@ -26,6 +29,8 @@ dependencies {
 3. Done
 
 ### Examples
+
+---
 
 #### Example 1
 ```java
@@ -107,9 +112,10 @@ opt3=20
 opt4=2687.4
 ```
 
-For more information check wiki.
-
 ### Build
+
+---
+
 uses **gradle 8.8** and **java 21**
 1. Download or clone this project
 2. Change the code

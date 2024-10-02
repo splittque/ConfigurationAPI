@@ -6,7 +6,7 @@ import java.util.Properties;
 
 public interface ConfigurationType {
     void create(Path path);
-    void load(BufferedReader reader);
+    void load(Path path, BufferedReader reader);
     void save(BufferedWriter writer);
     void list();
 

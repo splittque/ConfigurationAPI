@@ -1,6 +1,7 @@
 package me.splitque.configuration;
 
 import me.splitque.configuration.filetypes.ConfigurationType;
+import me.splitque.configuration.filetypes.JSON;
 import me.splitque.configuration.filetypes.PROPERTIES;
 
 import java.io.*;
@@ -33,11 +34,20 @@ public class ConfigHandler extends ConfigAPI {
                     config.create(configPath);
                 } else {
                     try (BufferedReader reader = getReader(configPath)) {
-                        config.load(reader);
+                        config.load(null, reader);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
                 }
+                break;
+            case "JSON":
+                config = new JSON();
+                if (!Files.exists(configPath)) {
+                    config.create(configPath);
+                } else {
+                    config.load(configPath, null);
+                }
+                break;
         }
     }
 

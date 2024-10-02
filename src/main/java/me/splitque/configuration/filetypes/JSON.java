@@ -1,17 +1,21 @@
 package me.splitque.configuration.filetypes;
 
-import java.io.*;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Properties;
 
-public class PROPERTIES implements ConfigurationType {
-    Properties properties = new Properties();
+public class JSON implements ConfigurationType {
+    JSONObject json;
 
     @Override
     public void create(Path path) {
         try {
             Files.createFile(path);
+            json = new JSONObject();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -20,7 +24,7 @@ public class PROPERTIES implements ConfigurationType {
     @Override
     public void load(Path path, BufferedReader reader) {
         try {
-            properties.load(reader);
+            json = new JSONObject(Files.readString(path));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -28,53 +32,43 @@ public class PROPERTIES implements ConfigurationType {
 
     @Override
     public void save(BufferedWriter writer) {
-        try {
-            properties.store(writer, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        json.write(writer);
     }
 
     @Override
     public void list() {
-        System.out.println(properties.toString());
+        System.out.println(json.toString());
     }
 
     @Override
     public void putOption(String key, String value) {
-        if (!properties.containsKey(key)) {
-            properties.put(key, value);
+        if (json.isNull(key)) {
+            json.put(key, value);
         }
     }
 
     @Override
     public void setOption(String key, String value) {
-        properties.put(key, value);
+        json.put(key, value);
     }
 
     @Override
     public String getString(String key) {
-        return String.valueOf(properties.get(key));
+        return json.getString(key);
     }
 
     @Override
     public Boolean getBoolean(String key) {
-        String bool = properties.getProperty(key);
-        if (bool.equals("true")) {
-            return true;
-        } else if (bool.equals("false")) {
-            return false;
-        }
-        return null;
+        return json.getBoolean(key);
     }
 
     @Override
     public int getInt(String key) {
-        return Integer.parseInt(properties.getProperty(key));
+        return json.getInt(key);
     }
 
     @Override
     public Double getDouble(String key) {
-        return Double.parseDouble(properties.getProperty(key));
+        return json.getDouble(key);
     }
 }

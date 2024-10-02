@@ -7,7 +7,7 @@ repositories {
 }
 
 group = "me.splitque.configuration"
-version = "v1.0-alpha"
+version = "v1.1-alpha"
 
 dependencies {
     testImplementation platform('org.junit:junit-bom:5.10.0')
